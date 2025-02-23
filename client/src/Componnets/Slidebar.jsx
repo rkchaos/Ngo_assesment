@@ -10,7 +10,7 @@ function Sidebar({ isOpen, onClose }) {
   useEffect(() => {
     async function currentUser() {
       try {
-        let res = await axios.get("http://localhost:8080/currentuser", { withCredentials: true })
+        let res = await axios.get("https://ngo-assesment-1.onrender.com/currentuser", { withCredentials: true })
         if (res.data) {
           setCurrent(res.data.currentUser)
         }

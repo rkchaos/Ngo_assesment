@@ -97,9 +97,9 @@ const Subdomain = () => {
                 amount: donationAmount
             }
             try {
-                const { data: { key } } = await axios.get('http://localhost:8080/api/getKey')
+                const { data: { key } } = await axios.get('https://ngo-assesment-1.onrender.com/api/getKey')
                 console.log(key)
-                const res = await axios.post(`http://localhost:8080/checkout`, data);
+                const res = await axios.post(`https://ngo-assesment-1.onrender.com/checkout`, data);
                 console.log(res.data.data.id)
                 if (res.data) {
                     var options = {
@@ -120,7 +120,7 @@ const Subdomain = () => {
                             }
                             try {
                                 const verificationRes = await axios.post(
-                                    `http://localhost:8080/verify`,
+                                    `https://ngo-assesment-1.onrender.com/verify`,
                                     verificationData,
                                 )
                                 if (verificationRes.data.success) {

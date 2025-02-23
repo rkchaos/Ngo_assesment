@@ -54,7 +54,7 @@ export default function Login() {
 
         setIsLoading(true);
         try {
-            const response = await axios.post("http://localhost:8080/login", formData, { withCredentials: true });
+            const response = await axios.post("https://ngo-assesment-1.onrender.com/login", formData, { withCredentials: true });
             if (response.data) {
                 toast.success('Login successfully')
                 navigate("/dashboard");

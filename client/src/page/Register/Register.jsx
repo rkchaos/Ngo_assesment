@@ -110,7 +110,7 @@ export default function Register() {
 
         setIsLoading(true)
         try {
-            const response = await axios.post("http://localhost:8080/register", formData, { withCredentials: true })
+            const response = await axios.post("https://ngo-assesment-1.onrender.com/register", formData, { withCredentials: true })
             if (response.data) {
                 toast.success('Account create  successfully')
                 navigate("/login")

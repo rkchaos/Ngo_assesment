@@ -17,7 +17,7 @@ function Transitions() {
     useEffect(() => {
         async function currentUser() {
             try {
-                let res = await axios.get("http://localhost:8080/currentuser", { withCredentials: true })
+                let res = await axios.get("https://ngo-assesment-1.onrender.com/currentuser", { withCredentials: true })
                 if (res.data) {
                     setCurrent(res.data.currentUser)
 
@@ -45,7 +45,7 @@ function Transitions() {
                 referralCode: useCurrent.referralCode
             }
             try {
-                let res = await axios.post("http://localhost:8080/findTrnasation", data)
+                let res = await axios.post("https://ngo-assesment-1.onrender.com/findTrnasation", data)
                 setTranation(res.data.Tranasation)
             }
             catch (err) {

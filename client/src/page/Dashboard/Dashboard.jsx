@@ -76,7 +76,7 @@ function Dashboard() {
   useEffect(() => {
     async function currentUser() {
       try {
-        let res = await axios.get("http://localhost:8080/currentuser", { withCredentials: true })
+        let res = await axios.get("https://ngo-assesment-1.onrender.com/currentuser", { withCredentials: true })
         if (res.data) {
           setCurrent(res.data.currentUser)
         }
@@ -96,7 +96,7 @@ function Dashboard() {
     currentUser()
   }, [navigate])
   function handlecopy() {
-    let donationLink = `http://localhost:5173/donation/${useCurrent.referralCode}`
+    let donationLink = `https://ngo-assesment-1.onrender.com/donation/${useCurrent.referralCode}`
     navigator.clipboard.writeText(donationLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000)
@@ -110,7 +110,7 @@ function Dashboard() {
         let data = {
           referralCode: useCurrent.referralCode
         }
-        let res = await axios.post("http://localhost:8080/calculatePercentage", data)
+        let res = await axios.post("https://ngo-assesment-1.onrender.com/calculatePercentage", data)
         setTranstion(res.data)
         setProgress(res.data.percentage)
       }
@@ -129,7 +129,7 @@ function Dashboard() {
 
   const handleLogout = async () => {
     try {
-      await axios.delete("http://localhost:8080/logout",{ withCredentials: true });
+      await axios.delete("https://ngo-assesment-1.onrender.com/logout",{ withCredentials: true });
       toast.success('Logged out successfully');
       navigate("/login");
     } catch (err) {
@@ -226,7 +226,7 @@ function Dashboard() {
                 <button
                   className="w-full sm:w-auto bg-green-500 text-white px-8 py-4 rounded-xl flex items-center justify-center space-x-3 hover:bg-green-600 transition-all transform hover:scale-105 font-medium text-lg shadow-md"
                   onClick={() => {
-                    const donationLink = `http://localhost:5173/donation/${useCurrent.referralCode}`;
+                    const donationLink = `https://ngo-assesment-1.onrender.com/donation/${useCurrent.referralCode}`;
                     const message = `Hi, I am raising funds for ngo. Please support me by donating through this link ${donationLink}and make a difference!`;
                     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
                     window.open(whatsappUrl, "_blank");
