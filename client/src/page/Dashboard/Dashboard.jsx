@@ -228,7 +228,7 @@ function Dashboard() {
                   className="w-full sm:w-auto bg-green-500 text-white px-8 py-4 rounded-xl flex items-center justify-center space-x-3 hover:bg-green-600 transition-all transform hover:scale-105 font-medium text-lg shadow-md"
                   onClick={() => {
                     const donationLink = `https://ngo-assesment.vercel.app/donation/${useCurrent.referralCode}`;
-                    const message = `Hi, I am raising funds for ngo. Please support me by donating through this link ${donationLink}and make a difference!`;
+                    const message = `Hi, I am raising funds for ngo. Please support me by donating through this link ${donationLink} \n and make a difference!`;
                     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
                     window.open(whatsappUrl, "_blank");
                   }}
