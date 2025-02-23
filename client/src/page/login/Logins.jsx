@@ -60,7 +60,12 @@ export default function Login() {
                 navigate("/dashboard");
             }
         } catch (error) {
+            if(error?.response?.data?.message === "No such client found"){
+                toast.error('No such Client is found')
+            }
+           else{
             toast.error('Invalid credentials')
+           }
             console.error(error);
         } finally {
             setIsLoading(false);
