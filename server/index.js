@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGOURL)
         console.log('server error', err)
     })
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173","https://ngo-assesment.vercel.app"],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }))
