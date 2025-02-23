@@ -1,22 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Button, TextField, Card, CardContent, CardHeader, Alert, Box } from "@mui/material";
+import { Button, TextField, Card, CardContent, CardHeader, Box } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Info } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+
 const theme = createTheme();
 
 export default function Login() {
     let navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-    });
-    const [errors, setErrors] = useState({
-        email: "",
-        password: "",
-    });
-
+    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [errors, setErrors] = useState({ email: "", password: "" });
+    const [showInfo, setShowInfo] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
     const validateEmail = (email) => {
@@ -53,24 +49,27 @@ export default function Login() {
         }
 
         setIsLoading(true);
+
         try {
             const response = await axios.post("https://ngo-assesment-1.onrender.com/login", formData, { withCredentials: true });
             if (response.data) {
-                toast.success('Login successfully')
+                toast.success('Login successfully');
                 navigate("/dashboard");
             }
         } catch (error) {
-            if(error?.response?.data?.message === "No such client found"){
-                toast.error('No such Client is found')
-            }
-           else{
-            toast.error('Invalid credentials')
-           }
+            toast.error(error?.response?.data?.message === "No such client found" ? 'No such Client is found' : 'Invalid credentials');
             console.error(error);
         } finally {
             setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowInfo(false);
+        }, 10000);
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <ThemeProvider theme={theme}>
@@ -123,17 +122,43 @@ export default function Login() {
                             >
                                 {isLoading ? "Logging in..." : "Login"}
                             </Button>
-
                         </form>
-                        <p>Create a account?  <a href="/" style={{ color: "blue" }}>signup</a></p>
+                        <p>Create an account? <Link to="/" style={{ color: "blue" }}>Signup</Link></p>
                     </CardContent>
                 </Card>
-              
             </Box>
-            <Toaster
-                position="top-right"
-                reverseOrder={false}
-            />
+            {showInfo && (
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: 16,
+                        right: 16,
+                        maxWidth: 300,
+                        bgcolor: "white",
+                        p: 2,
+                        borderRadius: 2,
+                        boxShadow: 3,
+                        borderLeft: "4px solid blue",
+                        display: "flex",
+                        alignItems: "center",
+                    }}
+                >
+                    <Info size={20} color="blue" />
+                    <Box sx={{ ml: 2, flex: 1 }}>
+                        <h3 style={{ margin: 0 }}>Please Note</h3>
+                        <p style={{ margin: 0, fontSize: "0.875rem", color: "gray" }}>
+                            Initial loading may take a moment as this application is hosted on a free tier server.
+                        </p>
+                    </Box>
+                    <button
+                        onClick={() => setShowInfo(false)}
+                        style={{ marginLeft: 8, border: "none", background: "none", cursor: "pointer", color: "gray" }}
+                    >
+                        ×
+                    </button>
+                </Box>
+            )}
+            <Toaster position="top-right" reverseOrder={false} />
         </ThemeProvider>
     );
 }
