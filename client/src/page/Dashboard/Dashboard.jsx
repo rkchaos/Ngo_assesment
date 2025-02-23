@@ -77,6 +77,7 @@ function Dashboard() {
     async function currentUser() {
       try {
         let res = await axios.get("https://ngo-assesment-1.onrender.com/currentuser", { withCredentials: true })
+        console.log(res.data)
         if (res.data) {
           setCurrent(res.data.currentUser)
         }
