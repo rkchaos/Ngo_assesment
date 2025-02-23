@@ -89,6 +89,9 @@ function Dashboard() {
         else if (err?.response?.data?.message === "Invalid token credentials.") {
           navigate("/login")
         }
+        else if (err?.response?.data?.message === "Refresh token has expired") {
+          navigate("/login")
+        }
         else {
           console.log(err)
         }
@@ -130,7 +133,7 @@ function Dashboard() {
 
   const handleLogout = async () => {
     try {
-      await axios.delete("https://ngo-assesment-1.onrender.com/logout",{ withCredentials: true });
+      await axios.delete("https://ngo-assesment-1.onrender.com/logout", { withCredentials: true });
       toast.success('Logged out successfully');
       navigate("/login");
     } catch (err) {
