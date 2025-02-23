@@ -1,0 +1,54 @@
+.image {
+    height: 500px;
+    width: 230vh;
+    max-width: 100%;
+    border-radius: 1rem;
+    margin: 16px;
+}
+
+.container {
+    padding: 0 16px;
+}
+.image-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+
+  .spans{
+    color: white;
+  }
+@media screen and (max-width: 1219px) {
+    .image {
+        width: 100%;
+    }
+    .name-overlay{
+        display: none;
+    }
+    .spans{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .image {
+        width: 100%;
+        margin: 8px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .image {
+        width: 100%;
+        margin: 4px;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .image {
+        width: 100%;
+        height: 200px;
+        margin: 0;
+    }
+}
